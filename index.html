@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Devinettes Multijoueur</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher-js/7.0.3/pusher.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        select, input, button {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu de Devinettes</h1>
+    
+    <label for="themeSelect">Choisir un thème:</label>
+    <select id="themeSelect">
+        <option value="Histoire">Histoire</option>
+        <option value="Science">Science</option>
+        <option value="Cinéma">Cinéma</option>
+        <option value="Sport">Sport</option>
+    </select>
+
+    <p id="wordDisplay">Devinez le mot...</p>
+    <input type="text" id="guessInput" placeholder="Devinez le mot..." />
+    <button id="submitGuess">Soumettre</button>
+
+    <script>
+        const themes = ["Histoire", "Science", "Cinéma", "Sport"];
+        let currentTheme = localStorage.getItem("selectedTheme") || themes[0];
+        let wordToGuess = localStorage.getItem("wordToGuess") || generateRandomWord();
+
+        const themeSelect = document.getElementById("themeSelect");
+        const wordDisplay = document.getElementById("wordDisplay");
+        const guessInput = document.getElementById("guessInput");
+        const submitGuess = document.getElementById("submitGuess");
+
+        // Initialisation de Pusher pour le mode multijoueur
+        const pusher = new Pusher("2b825dbc408ddc9753de", { cluster: "eu" });
+        const channel = pusher.subscribe("game-channel");
+
+        // Écouter l'événement "new-word" (mot changé)
+        channel.bind("new-word", (data) => {
+            wordToGuess = data.word;
+            localStorage.setItem("wordToGuess", wordToGuess);
+            wordDisplay.textContent = "Devinez le mot...";
+        });
+
+        // Remplir la liste des thèmes
+        themes.forEach(theme => {
+            const option = document.createElement("option");
+            option.value = theme;
+            option.textContent = theme;
+            themeSelect.appendChild(option);
+        });
+
+        themeSelect.value = currentTheme;
+
+        // Sauvegarder le thème sélectionné
+        themeSelect.addEventListener("change", () => {
+            currentTheme = themeSelect.value;
+            localStorage.setItem("selectedTheme", currentTheme);
+            wordToGuess = generateRandomWord();
+            localStorage.setItem("wordToGuess", wordToGuess);
+            sendNewWord(wordToGuess); // Envoi du mot via Pusher
+        });
+
+        // Si un mot n'est pas encore défini, en générer un en fonction du thème
+        if (!wordToGuess) {
+            wordToGuess = generateRandomWord();
+            localStorage.setItem("wordToGuess", wordToGuess);
+        }
+
+        wordDisplay.textContent = "Devinez le mot..."; // Message d'attente initial
+
+        function generateRandomWord() {
+            const words = {
+                "Histoire": ["Napoléon", "Révolution", "Empire", "Louvre"],
+                "Science": ["Atome", "ADN", "Génétique", "Cellule"],
+                "Cinéma": ["Spielberg", "Oscar", "Hollywood", "Film"],
+                "Sport": ["Football", "Marathon", "Basket", "Tennis"]
+            };
+            const wordsList = words[currentTheme] || ["Mystère"];
+            return wordsList[Math.floor(Math.random() * wordsList.length)];
+        }
+
+        function sendNewWord(word) {
+            // Envoie de l'événement "new-word" à Pusher
+            pusher.trigger("game-channel", "new-word", { word: word });
+        }
+
+        submitGuess.addEventListener("click", () => {
+            const guess = guessInput.value.trim().toLowerCase();
+            if (guess === wordToGuess.toLowerCase()) {
+                alert("Bravo !");
+                wordToGuess = generateRandomWord();
+                localStorage.setItem("wordToGuess", wordToGuess);
+                sendNewWord(wordToGuess); // Envoyer le nouveau mot à tous les joueurs
+            }
+            guessInput.value = "";
+        });
+
+        // Assurer que le mot est toujours affiché
+        wordDisplay.textContent = wordToGuess;
+    </script>
+</body>
+</html>
