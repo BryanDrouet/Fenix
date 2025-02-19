@@ -15,10 +15,10 @@ let categories = [
 
 let players = ['Joueur 1', 'Joueur 2', 'Joueur 3'];
 let currentPlayerIndex = 0;
-let score = 0;
 let currentCategoryIndex = -1;
 let currentQuestionIndex = -1;
 let categoriesPerPlayer = 4;
+let score = 0;
 
 function displayCategories() {
     const container = document.getElementById('categories-container');
@@ -31,11 +31,6 @@ function displayCategories() {
 }
 
 function startQuiz(categoryIndex) {
-    if (players[currentPlayerIndex].completedCategories === categoriesPerPlayer) {
-        endGame();
-        return;
-    }
-
     currentCategoryIndex = categoryIndex;
     currentQuestionIndex = 0;
     displayQuestion();
@@ -76,35 +71,25 @@ function checkAnswer(selectedAnswer) {
 }
 
 function endCategory() {
-    alert(`${players[currentPlayerIndex]} a terminé la catégorie avec un score de ${score}!`);
+    // No alert, the score is just updated
+    let currentPlayer = players[currentPlayerIndex];
+    document.getElementById('player-score').textContent = `Score de ${currentPlayer}: ${score}`;
 
-    players[currentPlayerIndex].completedCategories++;
-
-    if (players[currentPlayerIndex].completedCategories === categoriesPerPlayer) {
-        alert(`${players[currentPlayerIndex]} a terminé toutes ses catégories.`);
-    }
-
-    score = 0;
-
-    // Pass to the next player if current player finished their categories
+    // Move to next player if needed
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-    
+
     if (currentPlayerIndex === 0) {
-        alert("Fin de la première phase, passage à la phase suivante !");
-        // Logic for phase transition goes here
+        // Phase 1 completed
+        document.getElementById('phase-container').classList.remove('hidden');
     } else {
-        alert(`${players[currentPlayerIndex]}'s tour!`);
+        // Update for the next player's turn
+        document.getElementById('current-player').textContent = `${players[currentPlayerIndex]}'s tour`;
     }
 
+    // Reset for next question
+    score = 0;
     document.getElementById('categories-container').classList.remove('hidden');
     document.getElementById('question-container').classList.add('hidden');
-    document.getElementById('score-container').classList.add('hidden');
 }
-
-// Initialize player objects
-players = players.map(player => ({
-    name: player,
-    completedCategories: 0
-}));
 
 displayCategories();
