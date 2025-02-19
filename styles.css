@@ -17,13 +17,9 @@ h1 {
 	margin-bottom: 20px;
 }
 
-h2 {
-	padding-top: 0;
-}
-
-ul {
-	padding-bottom: 0;
-	list-style-type: none;
+h2, ul {
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 /* Conteneur des catégories */
