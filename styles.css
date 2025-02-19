@@ -1,7 +1,7 @@
 /* Styles généraux */
 body {
 	background-color: #2E8B57;
-	color: white;
+	color: #212121;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: flex;
 	justify-content: center;
@@ -29,9 +29,9 @@ h1 {
 
 /* Carte des catégories */
 #categories-container button {
-	background-color: #444;
+	background-color: #FFEB3B;  /* Jaune pour les catégories */
 	border: none;
-	color: white;
+	color: #212121;
 	font-size: 16px;
 	padding: 15px;
 	cursor: pointer;
@@ -47,7 +47,7 @@ h1 {
 }
 
 #categories-container button:hover {
-	background-color: #555;
+	background-color: #FFC107;  /* Jaune plus foncé au survol */
 	transform: scale(1.05);
 }
 
@@ -94,9 +94,11 @@ h1 {
 }
 
 #current-player {
-    text-align: center; /* Centre le texte horizontalement */
-    font-size: 1.5rem;  /* Taille du texte */
-    margin-top: 20px;   /* Marge au-dessus du texte */
+	text-align: center;  /* Centrer le texte */
+	font-size: 2rem;  /* Augmenter la taille du texte */
+	font-weight: bold;  /* Gras pour le rendre plus visible */
+	color: #FF9800;  /* Jaune-orange pour le texte */
+	margin-bottom: 20px;
 }
 
 .selected {
