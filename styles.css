@@ -91,12 +91,17 @@ body {
 	background-color: #f44336 !important;
 }
 
+.show-score {
+	display: block !important;
+}
+
 /* Score container */
 #score-container {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-	font-size: 18px;
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: none; /* Caché par défaut */
 }
 
 #score-container table {
