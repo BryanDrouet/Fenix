@@ -178,7 +178,7 @@ button.incorrect {
 	padding: 15px;
 	cursor: pointer;
 	border-radius: 10px;
-	display: none;
+	display: none; /* Caché au départ */
 }
 
 #validate-button:hover {
