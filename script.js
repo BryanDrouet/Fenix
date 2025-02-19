@@ -17,6 +17,7 @@ const scores = { Matthew: 0, Clément: 0, Ethan: 0 };
 let currentPlayerIndex = 0;
 const players = ["Matthew", "Clément", "Ethan"];
 let selectedAnswer = null;
+let usedCategories = [];
 
 const categoriesContainer = document.getElementById("categories-container");
 const questionContainer = document.getElementById("question-container");
@@ -25,8 +26,6 @@ const answersContainer = document.getElementById("answers-container");
 const validateButton = document.getElementById("validate-button");
 const scoreContainer = document.getElementById("score-container");
 const currentPlayerText = document.getElementById("current-player");
-
-let usedCategories = [];
 
 function showScores() {
 	scoreContainer.classList.add("show-score");
