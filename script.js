@@ -65,16 +65,20 @@ function askNextQuestion(questionData, questionIndex, category) {
 		validateButton.style.display = "block";
 		validateButton.disabled = true;
 
+		// Créer les boutons de réponse
 		currentQuestion.answers.forEach((answer, index) => {
 			const btn = document.createElement("button");
 			btn.textContent = answer;
-			btn.addEventListener("click", () => selectAnswer(btn, index, questionData[questionIndex].correct));
+			btn.classList.add("answer");  // Ajouter une classe pour griser les réponses
+			btn.addEventListener("click", () => selectAnswer(btn, index, currentQuestion.correct));
 			answersContainer.appendChild(btn);
 		});
+
 		questionContainer.classList.remove("hidden");
 
 		// Passer à la prochaine question lorsque la première est validée
 		validateButton.onclick = () => {
+			showCorrectAnswer(questionData[questionIndex].correct);  // Afficher la réponse correcte après validation
 			questionIndex++;
 			askNextQuestion(questionData, questionIndex, category);
 		};
@@ -120,6 +124,15 @@ function nextPlayer() {
 	if (document.querySelectorAll("#categories-container button.disabled").length === categories.length) {
 		showScores();
 	}
+}
+
+function showCorrectAnswer(correctAnswer) {
+	// Afficher la réponse correcte en vert
+	[...answersContainer.children].forEach(btn => {
+		if (btn.textContent === correctAnswer) {
+			btn.classList.add("correct");
+		}
+	});
 }
 
 categories.forEach(cat => {
