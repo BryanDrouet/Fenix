@@ -107,7 +107,7 @@ function selectAnswer(button, index, correct) {
 
 function nextPlayer() {
 	currentPlayerIndex = (currentPlayerIndex + 1) % 3;
-	currentPlayerText.textContent = `Joueur: ${players[currentPlayerIndex]}`;
+	currentPlayerText.textContent = `Au tour de ${players[currentPlayerIndex]}`;
 	validateButton.style.display = "none";
 	questionContainer.classList.add("hidden");
 
