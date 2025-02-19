@@ -13,12 +13,10 @@ let categories = [
 	{ name: 'Cinéma', questions: [{ type: 'vrai_faux', question: 'La première guerre mondiale est un sujet du film "1917".', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a réalisé le film "Inception"?', answers: ['Christopher Nolan', 'Steven Spielberg', 'Quentin Tarantino', 'Martin Scorsese'], correct: 'Christopher Nolan' }] }
 ];
 
-
 const scores = { Matthew: 0, Clément: 0, Ethan: 0 };
 let currentPlayerIndex = 0;
 const players = ["Matthew", "Clément", "Ethan"];
 let selectedAnswer = null;
-let questionCount = 0; // Compteur de questions répondues
 
 const categoriesContainer = document.getElementById("categories-container");
 const questionContainer = document.getElementById("question-container");
@@ -28,104 +26,91 @@ const validateButton = document.getElementById("validate-button");
 const scoreContainer = document.getElementById("score-container");
 const currentPlayerText = document.getElementById("current-player");
 
-// Affichage des scores au début de la manche
+let usedCategories = [];
+
 function showScores() {
 	scoreContainer.classList.add("show-score");
 }
 
-// Cacher les scores pendant les questions
 function hideScores() {
 	scoreContainer.classList.remove("show-score");
 }
 
-// Affichage des catégories en 4x3
-categories.forEach((cat, index) => {
-	const btn = document.createElement("button");
-	btn.textContent = cat.name;
-	btn.addEventListener("click", () => startQuestion(cat, btn));
-	categoriesContainer.appendChild(btn);
-});
-
-// Fonction pour lancer une question
 function startQuestion(category, btn) {
 	hideScores();
 	btn.disabled = true;
 	btn.classList.add("disabled");
 
-	const questionData = category.questions[questionCount];
-
-	questionText.textContent = questionData.question;
-	answersContainer.innerHTML = "";
-	selectedAnswer = null;
-	validateButton.textContent = "Valider";
-	validateButton.style.display = "block";
-	validateButton.disabled = true;
-
-	questionData.answers.forEach((answer, index) => {
-		const btn = document.createElement("button");
-		btn.textContent = answer;
-		btn.addEventListener("click", () => selectAnswer(btn, index, questionData.correct));
-		answersContainer.appendChild(btn);
+	const questionData = category.questions.map((question, index) => {
+		return {
+			question: question.question,
+			answers: question.answers,
+			correct: question.correct
+		};
 	});
 
-	questionContainer.classList.remove("hidden");
+	let questionIndex = 0;
+	askNextQuestion(questionData, questionIndex, category);
 }
 
-// Sélection de la réponse
-function selectAnswer(button, index, correctIndex) {
+function askNextQuestion(questionData, questionIndex, category) {
+	if (questionIndex < 2) {
+		const currentQuestion = questionData[questionIndex];
+		questionText.textContent = currentQuestion.question;
+		answersContainer.innerHTML = "";
+		selectedAnswer = null;
+		validateButton.textContent = "Valider";
+		validateButton.style.display = "block";
+		validateButton.disabled = true;
+
+		currentQuestion.answers.forEach((answer, index) => {
+			const btn = document.createElement("button");
+			btn.textContent = answer;
+			btn.addEventListener("click", () => selectAnswer(btn, index, questionData[questionIndex].correct));
+			answersContainer.appendChild(btn);
+		});
+		questionContainer.classList.remove("hidden");
+
+		// Passer à la prochaine question lorsque la première est validée
+		validateButton.onclick = () => {
+			questionIndex++;
+			askNextQuestion(questionData, questionIndex, category);
+		};
+	} else {
+		// Après avoir répondu aux deux questions
+		validateButton.textContent = "Suivant";
+		validateButton.onclick = nextPlayer;
+	}
+}
+
+function selectAnswer(button, index, correct) {
 	[...answersContainer.children].forEach(btn => btn.classList.remove("selected"));
 	button.classList.add("selected");
 	selectedAnswer = index;
 	validateButton.disabled = false;
-	validateButton.onclick = () => validateAnswer(correctIndex);
 }
 
-// Validation de la réponse
-function validateAnswer(correctIndex) {
-	[...answersContainer.children].forEach((btn, index) => {
-		if (index === correctIndex) btn.classList.add("correct");
-		if (index === selectedAnswer && index !== correctIndex) btn.classList.add("incorrect");
-	});
-
-	if (selectedAnswer === correctIndex) {
-		scores[players[currentPlayerIndex]]++;
-		document.getElementById(`score-${players[currentPlayerIndex].toLowerCase()}`).textContent = scores[players[currentPlayerIndex]];
-	}
-
-	// Incrémenter le compteur de questions répondues
-	questionCount++;
-
-	// Si 2 questions ont été répondues, passer à la question suivante
-	if (questionCount >= 2) {
-		validateButton.textContent = "Question suivante";
-		validateButton.onclick = nextPlayer;
-	} else {
-		validateButton.textContent = "Suivant";
-		validateButton.onclick = nextQuestion;
-	}
-}
-
-// Passage à la question suivante
-function nextQuestion() {
-	// Masquer la question précédente
-	questionContainer.classList.add("hidden");
-
-	// Lancer la prochaine question
-	startQuestion(categories[questionCount % categories.length], categoriesContainer.children[questionCount % categories.length]);
-}
-
-// Passage au joueur suivant
 function nextPlayer() {
-	currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+	currentPlayerIndex = (currentPlayerIndex + 1) % 3;
 	currentPlayerText.textContent = `Joueur: ${players[currentPlayerIndex]}`;
 	validateButton.style.display = "none";
 	questionContainer.classList.add("hidden");
 
-	// Si toutes les catégories ont été jouées, afficher les scores
 	if (document.querySelectorAll("#categories-container button.disabled").length === categories.length) {
 		showScores();
 	}
 }
 
-// Affichage des scores au début de la partie
+categories.forEach(cat => {
+	const btn = document.createElement("button");
+	btn.textContent = cat.name;
+	btn.addEventListener("click", () => {
+		if (!usedCategories.includes(cat.name)) {
+			usedCategories.push(cat.name);
+			startQuestion(cat, btn);
+		}
+	});
+	categoriesContainer.appendChild(btn);
+});
+
 showScores();
