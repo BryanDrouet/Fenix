@@ -21,7 +21,7 @@ h2, h3, h4 {
 #categories-container {
     display: grid;
     grid-template-columns: repeat(4, 160px); /* 4 cartes par ligne */
-    grid-template-rows: repeat(3, 130px); /* 3 lignes */
+    grid-template-rows: auto; /* Les lignes s'ajustent en fonction du nombre de catégories */
     gap: 10px; /* Espacement entre les cartes */
     justify-content: center;
     margin-bottom: 30px;
