@@ -84,9 +84,24 @@ function askNextQuestion(questionData, questionIndex, category) {
 }
 
 function selectAnswer(button, index, correct) {
-	[...answersContainer.children].forEach(btn => btn.classList.remove("selected"));
+	// Désactiver tous les boutons après la réponse
+	[...answersContainer.children].forEach(btn => btn.disabled = true);
+
+	// Marquer la réponse choisie en bleu
 	button.classList.add("selected");
-	selectedAnswer = index;
+
+	// Vérification de la bonne réponse
+	if (button.textContent === correct) {
+		button.classList.add("correct");
+	} else {
+		button.classList.add("incorrect");
+		// Afficher la bonne réponse en vert
+		[...answersContainer.children].forEach(btn => {
+			if (btn.textContent === correct) {
+				btn.classList.add("correct");
+			}
+		});
+	}
 	validateButton.disabled = false;
 }
 
