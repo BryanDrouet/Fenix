@@ -93,6 +93,12 @@ h1 {
 	transform: scale(0.98);
 }
 
+#current-player {
+    text-align: center; /* Centre le texte horizontalement */
+    font-size: 1.5rem;  /* Taille du texte */
+    margin-top: 20px;   /* Marge au-dessus du texte */
+}
+
 .selected {
 	background-color: #007bff !important;
 }
