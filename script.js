@@ -13,11 +13,12 @@ let categories = [
     { name: 'Cinéma', questions: [{ type: 'vrai_faux', question: 'La première guerre mondiale est un sujet du film "1917".', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a réalisé le film "Inception"?', answers: ['Christopher Nolan', 'Steven Spielberg', 'Quentin Tarantino', 'Martin Scorsese'], correct: 'Christopher Nolan' }] }
 ];
 
-let players = ['Joueur 1', 'Joueur 2'];
+let players = ['Joueur 1', 'Joueur 2', 'Joueur 3'];
 let currentPlayerIndex = 0;
 let score = 0;
 let currentCategoryIndex = -1;
 let currentQuestionIndex = -1;
+let categoriesPerPlayer = 4;
 
 function displayCategories() {
     const container = document.getElementById('categories-container');
@@ -30,6 +31,11 @@ function displayCategories() {
 }
 
 function startQuiz(categoryIndex) {
+    if (players[currentPlayerIndex].completedCategories === categoriesPerPlayer) {
+        endGame();
+        return;
+    }
+
     currentCategoryIndex = categoryIndex;
     currentQuestionIndex = 0;
     displayQuestion();
@@ -70,16 +76,23 @@ function checkAnswer(selectedAnswer) {
 }
 
 function endCategory() {
-    alert(`${players[currentPlayerIndex]} a terminé la catégorie avec un score de ${score} !`);
-    
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;  // Switch to the next player
+    alert(`${players[currentPlayerIndex]} a terminé la catégorie avec un score de ${score}!`);
+
+    players[currentPlayerIndex].completedCategories++;
+
+    if (players[currentPlayerIndex].completedCategories === categoriesPerPlayer) {
+        alert(`${players[currentPlayerIndex]} a terminé toutes ses catégories.`);
+    }
+
     score = 0;
 
+    // Pass to the next player if current player finished their categories
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    
     if (currentPlayerIndex === 0) {
         alert("Fin de la première phase, passage à la phase suivante !");
         // Logic for phase transition goes here
     } else {
-        // Continue to the next player
         alert(`${players[currentPlayerIndex]}'s tour!`);
     }
 
@@ -87,5 +100,11 @@ function endCategory() {
     document.getElementById('question-container').classList.add('hidden');
     document.getElementById('score-container').classList.add('hidden');
 }
+
+// Initialize player objects
+players = players.map(player => ({
+    name: player,
+    completedCategories: 0
+}));
 
 displayCategories();
