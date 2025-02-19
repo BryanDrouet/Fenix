@@ -17,6 +17,14 @@ h1 {
 	margin-bottom: 20px;
 }
 
+h2 {
+	padding-top: 0;
+}
+
+ul {
+	padding-bottom: 0;
+}
+
 /* Conteneur des catégories */
 #categories-container {
 	display: grid;
@@ -156,7 +164,6 @@ button.incorrect {
 }
 
 #score-container table {
-	background-color: #FFEB3B;  /* Jaune pour le tableau */
 	border-radius: 10px;
 	padding: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
