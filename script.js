@@ -18,6 +18,7 @@ const scores = { Matthew: 0, Clément: 0, Ethan: 0 };
 let currentPlayerIndex = 0;
 const players = ["Matthew", "Clément", "Ethan"];
 let selectedAnswer = null;
+let questionCount = 0; // Compteur de questions répondues
 
 const categoriesContainer = document.getElementById("categories-container");
 const questionContainer = document.getElementById("question-container");
@@ -38,9 +39,9 @@ function hideScores() {
 }
 
 // Affichage des catégories en 4x3
-categories.forEach(cat => {
+categories.forEach((cat, index) => {
 	const btn = document.createElement("button");
-	btn.textContent = cat;
+	btn.textContent = cat.name;
 	btn.addEventListener("click", () => startQuestion(cat, btn));
 	categoriesContainer.appendChild(btn);
 });
@@ -51,11 +52,7 @@ function startQuestion(category, btn) {
 	btn.disabled = true;
 	btn.classList.add("disabled");
 
-	const questionData = {
-		question: `Une question sur ${category} ?`,
-		answers: ["Réponse 1", "Réponse 2", "Réponse 3", "Réponse 4"],
-		correct: Math.floor(Math.random() * 4) // Choix aléatoire d'une bonne réponse
-	};
+	const questionData = category.questions[questionCount];
 
 	questionText.textContent = questionData.question;
 	answersContainer.innerHTML = "";
@@ -95,13 +92,31 @@ function validateAnswer(correctIndex) {
 		document.getElementById(`score-${players[currentPlayerIndex].toLowerCase()}`).textContent = scores[players[currentPlayerIndex]];
 	}
 
-	validateButton.textContent = "Question suivante";
-	validateButton.onclick = nextPlayer;
+	// Incrémenter le compteur de questions répondues
+	questionCount++;
+
+	// Si 2 questions ont été répondues, passer à la question suivante
+	if (questionCount >= 2) {
+		validateButton.textContent = "Question suivante";
+		validateButton.onclick = nextPlayer;
+	} else {
+		validateButton.textContent = "Suivant";
+		validateButton.onclick = nextQuestion;
+	}
+}
+
+// Passage à la question suivante
+function nextQuestion() {
+	// Masquer la question précédente
+	questionContainer.classList.add("hidden");
+
+	// Lancer la prochaine question
+	startQuestion(categories[questionCount % categories.length], categoriesContainer.children[questionCount % categories.length]);
 }
 
 // Passage au joueur suivant
 function nextPlayer() {
-	currentPlayerIndex = (currentPlayerIndex + 1) % 3;
+	currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 	currentPlayerText.textContent = `Joueur: ${players[currentPlayerIndex]}`;
 	validateButton.style.display = "none";
 	questionContainer.classList.add("hidden");
