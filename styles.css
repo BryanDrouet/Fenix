@@ -95,13 +95,19 @@ body {
 	display: block !important;
 }
 
+button.disabled {
+	pointer-events: none;
+	opacity: 0.5;
+	cursor: default;
+}
+
 /* Score container */
 #score-container {
 	position: absolute;
 	left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
-	display: none; /* Caché par défaut */
+	display: none; /* Caché pendant les questions */
 }
 
 #score-container table {
