@@ -1,6 +1,6 @@
 /* Styles généraux */
 body {
-	background-color: #FFEB3B;  /* Jaune clair pour le fond */
+	background-color: #2E8B57;  /* Fond vert */
 	color: #212121;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: flex;
@@ -149,14 +149,14 @@ button.incorrect {
 	top: 50%;
 	transform: translateY(-50%);
 	display: none; /* Caché pendant les questions */
-	background-color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(255, 255, 255, 0.8);  /* Fond jaune clair pour le tableau */
 	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	padding: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #score-container table {
-	background-color: #444;
+	background-color: #FFEB3B;  /* Jaune pour le tableau */
 	border-radius: 10px;
 	padding: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -164,7 +164,7 @@ button.incorrect {
 }
 
 #score-container th, #score-container td {
-	padding: 10px 20px;
+	padding: 5px 20px;  /* Réduit l'espace autour du texte */
 	text-align: center;
 }
 
