@@ -101,6 +101,20 @@ button.disabled {
 	cursor: default;
 }
 
+button.selected {
+	background-color: #4CAF50; /* Bleu clair */
+}
+
+button.correct {
+	background-color: #4CAF50; /* Vert pour la bonne réponse */
+	color: white;
+}
+
+button.incorrect {
+	background-color: #f44336; /* Rouge pour la mauvaise réponse */
+	color: white;
+}
+
 /* Score container */
 #score-container {
 	position: absolute;
