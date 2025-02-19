@@ -1,6 +1,6 @@
 /* Styles généraux */
 body {
-	background-color: #2E8B57;
+	background-color: #FFEB3B;  /* Jaune clair pour le fond */
 	color: #212121;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: flex;
@@ -83,6 +83,7 @@ h1 {
 	transition: all 0.3s ease;
 	animation: slideIn 1s ease-out;
 	border-radius: 10px;
+	opacity: 0.7;
 }
 
 #answers-container button:hover {
@@ -93,6 +94,7 @@ h1 {
 	transform: scale(0.98);
 }
 
+/* Style du texte "Au tour de ..." */
 #current-player {
 	text-align: center;  /* Centrer le texte */
 	font-size: 2rem;  /* Augmenter la taille du texte */
@@ -101,17 +103,18 @@ h1 {
 	margin-bottom: 20px;
 }
 
+/* Réponse sélectionnée en bleu */
 .selected {
 	background-color: #007bff !important;
 }
 
 /* Affichage de la correction */
 .correct {
-	background-color: #4CAF50 !important;
+	background-color: #4CAF50 !important;  /* Vert pour la bonne réponse */
 }
 
 .incorrect {
-	background-color: #f44336 !important;
+	background-color: #f44336 !important;  /* Rouge pour la mauvaise réponse */
 }
 
 .show-score {
@@ -124,8 +127,9 @@ button.disabled {
 	cursor: default;
 }
 
+/* Réponse correcte (bleu clair pour la sélection) */
 button.selected {
-	background-color: #4CAF50; /* Bleu clair */
+	background-color: #4CAF50; /* Bleu clair pour la sélection */
 }
 
 button.correct {
