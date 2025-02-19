@@ -1,95 +1,72 @@
-let categories = [
-    { name: 'Histoire', questions: [{ type: 'vrai_faux', question: 'La Révolution Française a eu lieu en 1789.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: 'oui_non', question: 'Napoléon Bonaparte est né en Corse.', answers: ['Oui', 'Non'], correct: 'Oui' }] },
-    { name: 'Théâtre', questions: [{ type: 'vrai_faux', question: 'Molière a écrit "Le Cid".', answers: ['Vrai', 'Faux'], correct: 'Faux' }, { type: '2_4', question: 'Qui est l\'auteur de "Le Misanthrope"?', answers: ['Molière', 'Racine', 'Corneille', 'Victor Hugo'], correct: 'Molière' }] },
-    { name: 'Photo', questions: [{ type: 'vrai_faux', question: 'Le daguerréotype est une technique photographique.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: 'oui_non', question: 'Les photographies en noir et blanc étaient plus populaires au début du 20e siècle.', answers: ['Oui', 'Non'], correct: 'Oui' }] },
-    { name: 'Jardinage', questions: [{ type: 'vrai_faux', question: 'Le cactus est une plante aquatique.', answers: ['Vrai', 'Faux'], correct: 'Faux' }, { type: '2_4', question: 'Quelles sont des plantes adaptées pour un jardin de rocaille?', answers: ['Cactus', 'Lavande', 'Rose', 'Fougère'], correct: 'Cactus, Lavande' }] },
-    { name: 'Radio', questions: [{ type: 'vrai_faux', question: 'France Inter est une station privée.', answers: ['Vrai', 'Faux'], correct: 'Faux' }, { type: 'oui_non', question: 'La radio FM est plus récente que la radio AM.', answers: ['Oui', 'Non'], correct: 'Non' }] },
-    { name: 'Thème Mystère', questions: [{ type: 'vrai_faux', question: 'Le Caméléon change de couleur pour se camoufler.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Combien de pattes a un insecte?', answers: ['6', '8', '10', '12'], correct: '6' }] },
-    { name: 'Jeux Vidéos', questions: [{ type: 'vrai_faux', question: 'Le premier jeu vidéo a été créé en 1958.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: 'oui_non', question: 'Mario est un personnage de Sega.', answers: ['Oui', 'Non'], correct: 'Non' }] },
-    { name: 'Politique', questions: [{ type: 'vrai_faux', question: 'Emmanuel Macron a été élu en 2017.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a fondé le Parti Socialiste en France?', answers: ['Jaurès', 'Mitterrand', 'Hollande', 'Valls'], correct: 'Jaurès' }] },
-    { name: 'International', questions: [{ type: 'vrai_faux', question: 'Le Vatican est un pays.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Quels pays sont dans l\'Union Européenne?', answers: ['France', 'Suisse', 'Espagne', 'Norvège'], correct: 'France, Espagne' }] },
-    { name: 'Science', questions: [{ type: 'vrai_faux', question: 'La Terre est plate.', answers: ['Vrai', 'Faux'], correct: 'Faux' }, { type: '2_4', question: 'Quelle est la planète la plus proche du Soleil?', answers: ['Terre', 'Vénus', 'Mars', 'Mercure'], correct: 'Mercure' }] },
-    { name: 'Musique', questions: [{ type: 'vrai_faux', question: 'Beethoven était sourd.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a composé "La symphonie du Nouveau Monde"?', answers: ['Mozart', 'Beethoven', 'Dvořák', 'Chopin'], correct: 'Dvořák' }] },
-    { name: 'Cinéma', questions: [{ type: 'vrai_faux', question: 'La première guerre mondiale est un sujet du film "1917".', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a réalisé le film "Inception"?', answers: ['Christopher Nolan', 'Steven Spielberg', 'Quentin Tarantino', 'Martin Scorsese'], correct: 'Christopher Nolan' }] }
-];
-
-let players = ['Joueur 1', 'Joueur 2', 'Joueur 3'];
+const categories = ["Histoire", "Théâtre", "Photo", "Jardinage", "Radio", "Thème mystère", "Jeux vidéos", "Politique", "International", "Sciences", "Sport", "Musique"];
+const scores = { Matthew: 0, Clément: 0, Ethan: 0 };
 let currentPlayerIndex = 0;
-let currentCategoryIndex = -1;
-let currentQuestionIndex = -1;
-let categoriesPerPlayer = 4;
-let score = 0;
+const players = ["Matthew", "Clément", "Ethan"];
+let selectedAnswer = null;
 
-function displayCategories() {
-    const container = document.getElementById('categories-container');
-    categories.forEach((category, index) => {
-        let categoryButton = document.createElement('button');
-        categoryButton.textContent = category.name;
-        categoryButton.addEventListener('click', () => startQuiz(index));
-        container.appendChild(categoryButton);
-    });
+// Affichage des catégories
+const categoriesContainer = document.getElementById("categories-container");
+categories.forEach(cat => {
+	const btn = document.createElement("button");
+	btn.textContent = cat;
+	btn.addEventListener("click", () => startQuestion(cat));
+	categoriesContainer.appendChild(btn);
+});
+
+// Gestion des questions
+const questionContainer = document.getElementById("question-container");
+const questionText = document.getElementById("question");
+const answersContainer = document.getElementById("answers-container");
+const validateButton = document.getElementById("validate-button");
+
+function startQuestion(category) {
+	const questionData = {
+		question: `Une question sur ${category} ?`,
+		answers: ["Réponse 1", "Réponse 2", "Réponse 3", "Réponse 4"],
+		correct: 1
+	};
+
+	questionText.textContent = questionData.question;
+	answersContainer.innerHTML = "";
+	selectedAnswer = null;
+	validateButton.textContent = "Valider";
+	validateButton.style.display = "block";
+	validateButton.disabled = true;
+
+	questionData.answers.forEach((answer, index) => {
+		const btn = document.createElement("button");
+		btn.textContent = answer;
+		btn.addEventListener("click", () => selectAnswer(btn, index, questionData.correct));
+		answersContainer.appendChild(btn);
+	});
+
+	questionContainer.classList.remove("hidden");
 }
 
-function startQuiz(categoryIndex) {
-    currentCategoryIndex = categoryIndex;
-    currentQuestionIndex = 0;
-    displayQuestion();
-    document.getElementById('categories-container').classList.add('hidden');
-    document.getElementById('question-container').classList.remove('hidden');
+function selectAnswer(button, index, correctIndex) {
+	[...answersContainer.children].forEach(btn => btn.classList.remove("selected"));
+	button.classList.add("selected");
+	selectedAnswer = index;
+	validateButton.disabled = false;
+	validateButton.onclick = () => validateAnswer(correctIndex);
 }
 
-function displayQuestion() {
-    let category = categories[currentCategoryIndex];
-    let question = category.questions[currentQuestionIndex];
-    
-    document.getElementById('question').textContent = question.question;
-    const answersContainer = document.getElementById('answers-container');
-    answersContainer.innerHTML = ''; // Clear previous answers
+function validateAnswer(correctIndex) {
+	[...answersContainer.children].forEach((btn, index) => {
+		if (index === correctIndex) btn.classList.add("correct");
+		if (index === selectedAnswer && index !== correctIndex) btn.classList.add("incorrect");
+	});
 
-    question.answers.forEach(answer => {
-        let button = document.createElement('button');
-        button.textContent = answer;
-        button.addEventListener('click', () => checkAnswer(answer));
-        answersContainer.appendChild(button);
-    });
+	if (selectedAnswer === correctIndex) scores[players[currentPlayerIndex]]++;
+	document.getElementById(`score-${players[currentPlayerIndex].toLowerCase()}`).textContent = scores[players[currentPlayerIndex]];
+
+	validateButton.textContent = "Question suivante";
+	validateButton.onclick = nextPlayer;
 }
 
-function checkAnswer(selectedAnswer) {
-    let category = categories[currentCategoryIndex];
-    let correctAnswer = category.questions[currentQuestionIndex].correct;
-    
-    if (selectedAnswer === correctAnswer) {
-        score++;
-    }
-
-    currentQuestionIndex++;
-    if (currentQuestionIndex < category.questions.length) {
-        displayQuestion();
-    } else {
-        endCategory();
-    }
+function nextPlayer() {
+	currentPlayerIndex = (currentPlayerIndex + 1) % 3;
+	document.getElementById("current-player").textContent = `Joueur: ${players[currentPlayerIndex]}`;
+	validateButton.style.display = "none";
+	questionContainer.classList.add("hidden");
 }
-
-function endCategory() {
-    // No alert, the score is just updated
-    let currentPlayer = players[currentPlayerIndex];
-    document.getElementById('player-score').textContent = `Score de ${currentPlayer}: ${score}`;
-
-    // Move to next player if needed
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-
-    if (currentPlayerIndex === 0) {
-        // Phase 1 completed
-        document.getElementById('phase-container').classList.remove('hidden');
-    } else {
-        // Update for the next player's turn
-        document.getElementById('current-player').textContent = `${players[currentPlayerIndex]}'s tour`;
-    }
-
-    // Reset for next question
-    score = 0;
-    document.getElementById('categories-container').classList.remove('hidden');
-    document.getElementById('question-container').classList.add('hidden');
-}
-
-displayCategories();
