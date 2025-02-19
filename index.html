@@ -4,48 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Game</title>
-    <style>
-        body {
-            background-color: #2E8B57;
-            color: white;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-        button {
-            padding: 10px;
-            margin: 5px;
-            background-color: #555;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #777;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div id="phase-container" class="hidden">
-        <h2>Phase suivante!</h2>
-    </div>
+    <h2>Bienvenue au Quiz !</h2>
 
     <div id="categories-container">
-        <h2>Choisissez une catégorie</h2>
+        <h3>Choisissez une catégorie</h3>
     </div>
 
     <div id="question-container" class="hidden">
-        <h3 id="current-player">Joueur 1</h3>
-        <h4 id="question"></h4>
+        <h4 id="current-player">Joueur: Matthew</h4>
+        <h5 id="question"></h5>
         <div id="answers-container"></div>
     </div>
 
     <div id="score-container">
-        <h3 id="player-score">Score:</h3>
+        <table>
+            <tr>
+                <th>Joueur</th>
+                <th>Score</th>
+            </tr>
+            <tr>
+                <td>Matthew</td>
+                <td id="score-matthew">0</td>
+            </tr>
+            <tr>
+                <td>Clément</td>
+                <td id="score-clement">0</td>
+            </tr>
+            <tr>
+                <td>Ethan</td>
+                <td id="score-ethan">0</td>
+            </tr>
+        </table>
     </div>
 
     <script src="script.js"></script>
