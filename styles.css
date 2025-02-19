@@ -37,7 +37,7 @@ ul {
 
 /* Carte des catégories */
 #categories-container button {
-	background-color: #FFEB3B;  /* Jaune pour les catégories */
+	background-color: #FFC107;  /* Jaune pour les catégories */
 	border: none;
 	color: #212121;
 	font-size: 16px;
@@ -55,7 +55,7 @@ ul {
 }
 
 #categories-container button:hover {
-	background-color: #FFC107;  /* Jaune plus foncé au survol */
+	background-color: #FFEB3B;  /* Jaune plus foncé au survol */
 	transform: scale(1.05);
 }
 
