@@ -3,27 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Overlay</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            background-color: #2E8B57;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            background-color: #555;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #777;
+        }
+    </style>
 </head>
 <body>
-    <div id="quiz-container">
-        <h1>Choisissez une catégorie</h1>
-        <div id="categories-container">
-            <!-- Dynamically generated categories will go here -->
-        </div>
 
-        <div id="question-container" class="hidden">
-            <p id="question"></p>
-            <div id="answers-container">
-                <!-- Dynamically generated answers will go here -->
-            </div>
-        </div>
+    <div id="phase-container" class="hidden">
+        <h2>Phase suivante!</h2>
+    </div>
 
-        <div id="score-container" class="hidden">
-            <p id="score">Score: 0</p>
-            <button id="next-phase" class="hidden">Passer à la phase suivante</button>
-        </div>
+    <div id="categories-container">
+        <h2>Choisissez une catégorie</h2>
+    </div>
+
+    <div id="question-container" class="hidden">
+        <h3 id="current-player">Joueur 1</h3>
+        <h4 id="question"></h4>
+        <div id="answers-container"></div>
+    </div>
+
+    <div id="score-container">
+        <h3 id="player-score">Score:</h3>
     </div>
 
     <script src="script.js"></script>
