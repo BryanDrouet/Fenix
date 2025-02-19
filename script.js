@@ -7,9 +7,14 @@ let categories = [
     { name: 'Thème Mystère', questions: [{ type: 'vrai_faux', question: 'Le Caméléon change de couleur pour se camoufler.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Combien de pattes a un insecte?', answers: ['6', '8', '10', '12'], correct: '6' }] },
     { name: 'Jeux Vidéos', questions: [{ type: 'vrai_faux', question: 'Le premier jeu vidéo a été créé en 1958.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: 'oui_non', question: 'Mario est un personnage de Sega.', answers: ['Oui', 'Non'], correct: 'Non' }] },
     { name: 'Politique', questions: [{ type: 'vrai_faux', question: 'Emmanuel Macron a été élu en 2017.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a fondé le Parti Socialiste en France?', answers: ['Jaurès', 'Mitterrand', 'Hollande', 'Valls'], correct: 'Jaurès' }] },
-    { name: 'International', questions: [{ type: 'vrai_faux', question: 'Le Vatican est un pays.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Quels pays sont dans l\'Union Européenne?', answers: ['France', 'Suisse', 'Espagne', 'Norvège'], correct: 'France, Espagne' }] }
+    { name: 'International', questions: [{ type: 'vrai_faux', question: 'Le Vatican est un pays.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Quels pays sont dans l\'Union Européenne?', answers: ['France', 'Suisse', 'Espagne', 'Norvège'], correct: 'France, Espagne' }] },
+    { name: 'Science', questions: [{ type: 'vrai_faux', question: 'La Terre est plate.', answers: ['Vrai', 'Faux'], correct: 'Faux' }, { type: '2_4', question: 'Quelle est la planète la plus proche du Soleil?', answers: ['Terre', 'Vénus', 'Mars', 'Mercure'], correct: 'Mercure' }] },
+    { name: 'Musique', questions: [{ type: 'vrai_faux', question: 'Beethoven était sourd.', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a composé "La symphonie du Nouveau Monde"?', answers: ['Mozart', 'Beethoven', 'Dvořák', 'Chopin'], correct: 'Dvořák' }] },
+    { name: 'Cinéma', questions: [{ type: 'vrai_faux', question: 'La première guerre mondiale est un sujet du film "1917".', answers: ['Vrai', 'Faux'], correct: 'Vrai' }, { type: '2_4', question: 'Qui a réalisé le film "Inception"?', answers: ['Christopher Nolan', 'Steven Spielberg', 'Quentin Tarantino', 'Martin Scorsese'], correct: 'Christopher Nolan' }] }
 ];
 
+let players = ['Joueur 1', 'Joueur 2'];
+let currentPlayerIndex = 0;
 let score = 0;
 let currentCategoryIndex = -1;
 let currentQuestionIndex = -1;
@@ -59,19 +64,28 @@ function checkAnswer(selectedAnswer) {
     currentQuestionIndex++;
     if (currentQuestionIndex < category.questions.length) {
         displayQuestion();
-    } else if (currentCategoryIndex < categories.length - 1) {
-        currentCategoryIndex++;
-        currentQuestionIndex = 0;
-        displayQuestion();
     } else {
-        finishQuiz();
+        endCategory();
     }
 }
 
-function finishQuiz() {
+function endCategory() {
+    alert(`${players[currentPlayerIndex]} a terminé la catégorie avec un score de ${score} !`);
+    
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;  // Switch to the next player
+    score = 0;
+
+    if (currentPlayerIndex === 0) {
+        alert("Fin de la première phase, passage à la phase suivante !");
+        // Logic for phase transition goes here
+    } else {
+        // Continue to the next player
+        alert(`${players[currentPlayerIndex]}'s tour!`);
+    }
+
+    document.getElementById('categories-container').classList.remove('hidden');
     document.getElementById('question-container').classList.add('hidden');
-    document.getElementById('score').textContent = 'Score final : ' + score;
-    document.getElementById('score-container').classList.remove('hidden');
+    document.getElementById('score-container').classList.add('hidden');
 }
 
 displayCategories();
