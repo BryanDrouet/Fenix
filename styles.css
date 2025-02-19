@@ -178,7 +178,6 @@ button.incorrect {
 	position: absolute;
 	right: 50px;
 	top: 50%;
-	transform: translateY(-50%);
 	background-color: #007bff;
 	color: white;
 	font-size: 18px;
