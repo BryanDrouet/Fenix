@@ -36,10 +36,11 @@ function hideScores() {
 }
 
 function startQuestion(category, btn) {
-	hideScores();
+	// Désactiver la catégorie en cours de jeu
 	btn.disabled = true;
 	btn.classList.add("disabled");
 
+	hideScores();
 	const questionData = category.questions.map((question, index) => {
 		return {
 			question: question.question,
@@ -110,6 +111,13 @@ function nextPlayer() {
 	validateButton.style.display = "none";
 	questionContainer.classList.add("hidden");
 
+	// Réactiver la catégorie après la fin
+	const categoryName = document.querySelector("#categories-container button.disabled").textContent;
+	const btn = [...categoriesContainer.children].find(button => button.textContent === categoryName);
+	btn.disabled = false;
+	btn.classList.remove("disabled");
+
+	// Vérifier si toutes les catégories ont été jouées
 	if (document.querySelectorAll("#categories-container button.disabled").length === categories.length) {
 		showScores();
 	}
