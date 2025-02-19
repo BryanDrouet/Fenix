@@ -23,6 +23,7 @@ h2 {
 
 ul {
 	padding-bottom: 0;
+	list-style-type: none;
 }
 
 /* Conteneur des catégories */
