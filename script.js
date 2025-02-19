@@ -36,11 +36,13 @@ function hideScores() {
 }
 
 function startQuestion(category, btn) {
-	// Désactiver la catégorie en cours de jeu
-	btn.disabled = true;
-	btn.classList.add("disabled");
-
 	hideScores();
+	btn.disabled = true;  // Désactive le bouton de la catégorie choisie
+	btn.classList.add("disabled");  // Ajoute une classe pour l'indiquer
+
+	// Empêche la sélection de toute autre catégorie pendant les questions
+	[...categoriesContainer.children].forEach(catBtn => catBtn.disabled = true);
+
 	const questionData = category.questions.map((question, index) => {
 		return {
 			question: question.question,
@@ -111,13 +113,10 @@ function nextPlayer() {
 	validateButton.style.display = "none";
 	questionContainer.classList.add("hidden");
 
-	// Réactiver la catégorie après la fin
-	const categoryName = document.querySelector("#categories-container button.disabled").textContent;
-	const btn = [...categoriesContainer.children].find(button => button.textContent === categoryName);
-	btn.disabled = false;
-	btn.classList.remove("disabled");
+	// Réactive les boutons de catégorie après la fin des questions
+	[...categoriesContainer.children].forEach(btn => btn.disabled = false);
 
-	// Vérifier si toutes les catégories ont été jouées
+	// Vérifie si toutes les catégories ont été jouées
 	if (document.querySelectorAll("#categories-container button.disabled").length === categories.length) {
 		showScores();
 	}
