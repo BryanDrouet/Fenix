@@ -3,32 +3,28 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Quiz Game</title>
+	<title>Jeu de Quiz</title>
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-	<div id="categories-container">
-		<!-- Catégories générées par JS -->
+	<div id="game-container">
+		<h1>Jeu de Quiz</h1>
+		<p id="current-player">Joueur: Matthew</p>
+		<div id="categories-container"></div>
+		<div id="question-container" class="hidden">
+			<p id="question"></p>
+			<div id="answers-container"></div>
+			<button id="validate-button">Valider</button>
+		</div>
+		<div id="score-container" class="show-score">
+			<h2>Scores</h2>
+			<ul>
+				<li>Matthew: <span id="score-Matthew">0</span></li>
+				<li>Clément: <span id="score-Clément">0</span></li>
+				<li>Ethan: <span id="score-Ethan">0</span></li>
+			</ul>
+		</div>
 	</div>
-
-	<div id="question-container" class="hidden">
-		<h4 id="current-player">Joueur: Matthew</h4>
-		<h5 id="question"></h5>
-		<div id="answers-container"></div>
-	</div>
-
-	<button id="validate-button" class="hidden">Valider</button>
-
-	<div id="score-container">
-		<table>
-			<tr><th>Joueur</th><th>Score</th></tr>
-			<tr><td>Matthew</td><td id="score-matthew">0</td></tr>
-			<tr><td>Clément</td><td id="score-clement">0</td></tr>
-			<tr><td>Ethan</td><td id="score-ethan">0</td></tr>
-		</table>
-	</div>
-
 	<script src="script.js"></script>
 </body>
 </html>
