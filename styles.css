@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 /* Styles généraux */
 body {
-	background-color: #2E8B57;  /* Fond vert */
+	background-color: #00ff00;  /* Fond vert */
 	color: #212121;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "DM Sans";
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -17,20 +19,39 @@ h1 {
 	margin-bottom: 20px;
 }
 
-h2, ul {
+h2 {
+	margin-top: 0 !important;
+	text-align: center;
+}
+
+ul {
 	margin: 0 !important;
 	padding: 0 !important;
 	list-style-type: none;
+	text-align: center;
+}
+
+#game-container {
+	width: 80%;  /* Ajuster pour avoir plus d'espace */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	height: 80%;
 }
 
 /* Conteneur des catégories */
 #categories-container {
 	display: grid;
 	grid-template-columns: repeat(4, 160px);
-	grid-template-rows: auto;
 	gap: 10px;
-	justify-content: center;
-	margin-bottom: 30px;
+	justify-items: center;  /* Centre les éléments horizontalement */
+	align-items: center;  /* Centre les éléments verticalement */
+	margin: 0 auto;  /* Centrer le conteneur par rapport à son parent */
+	margin-bottom: 0px !important;
+	transition: opacity 0.5s ease-in-out;
+	width: fit-content; /* Ajuster la largeur pour ne pas dépasser les éléments */
 }
 
 /* Carte des catégories */
@@ -38,12 +59,13 @@ h2, ul {
 	background-color: #FFC107;  /* Jaune pour les catégories */
 	border: none;
 	color: #212121;
-	font-size: 16px;
-	padding: 15px;
+	font-size: 18px;
+	padding: 8px;
+	font-weight: 800;
+	font-family: "DM Sans";
 	cursor: pointer;
 	width: 160px;
-	height: 130px;
-	display: flex;
+	height: 105px;
 	justify-content: center;
 	align-items: center;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -52,28 +74,43 @@ h2, ul {
 	border-radius: 15px;
 }
 
-#categories-container button:hover {
-	background-color: #FFEB3B;  /* Jaune plus foncé au survol */
-	transform: scale(1.05);
+#categories-container button:active {
+	background-color: #00ddc0 !important;
+	font-weight: 1000;
 }
 
-#categories-container button:active {
-	transform: scale(1);
+#categories-container button.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+	cursor: default !important;
+}
+
+#question {
+	font-weight: 1000;  /* Gras pour le rendre plus visible */
+	font-family: "DM Sans";
+	margin-top: 0px;
 }
 
 /* Question et réponses */
 #question-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
+	width: 100%;  /* Ajuster la largeur pour centrer la question */
+	margin: 0 auto;  /* Centrer horizontalement */
 	animation: fadeIn 1s ease-out;
-	margin-bottom: 30px;
+	text-align: center;
 }
 
 #question-container p {
 	font-size: 20px;
 	margin-bottom: 20px;
+}
+
+#answers-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 15px; /* Espacement entre les réponses */
+	width: 60%; /* Ajuste la largeur */
+	margin: 0 auto; /* Centrer le conteneur */
 }
 
 #answers-container button {
@@ -82,55 +119,71 @@ h2, ul {
 	color: white;
 	font-size: 16px;
 	padding: 15px;
-	margin: 10px;
-	width: 200px;
-	cursor: pointer;
+	width: 47%;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	transition: all 0.3s ease;
-	animation: slideIn 1s ease-out;
 	border-radius: 10px;
-	opacity: 0.7;
 }
 
 #answers-container button:hover {
-	background-color: #666;
-}
-
-#answers-container button:active {
-	transform: scale(0.98);
+	cursor: pointer;
 }
 
 /* Style du texte "Au tour de ..." */
 #current-player {
-	text-align: center;  /* Centrer le texte */
-	font-size: 2rem;  /* Augmenter la taille du texte */
-	font-weight: bold;  /* Gras pour le rendre plus visible */
-	color: #FF9800;  /* Jaune-orange pour le texte */
+	position: fixed;
+	top: 20px;  /* Espacement depuis le haut de la page */
+	left: 50%;
+	transform: translateX(-50%);  /* Centrer horizontalement */
+	font-size: 2rem;
+	font-weight: 1000;
+	font-family: "DM Sans";
+	color: #FF9800;
 	margin-bottom: 20px;
 }
 
 /* Réponse sélectionnée en bleu */
 .selected {
-	background-color: #007bff !important;
+	background-color: #0075f1 !important;
+	cursor: default !important;
+	font-weight: 700;
 }
 
 /* Affichage de la correction */
 .correct {
 	background-color: #4CAF50 !important;  /* Vert pour la bonne réponse */
+	cursor: default !important;
+	font-weight: 700 !important;
 }
 
 .incorrect {
 	background-color: #f44336 !important;  /* Rouge pour la mauvaise réponse */
+	cursor: default !important;
+	font-weight: 500 !important;
 }
 
 .show-score {
 	display: block !important;
 }
 
+.disabled{
+	opacity: 0.65;
+	cursor: default !important;
+}
+
+.hidden {
+    display: none !important;
+	animation: fadeOut 0.5s ease-out forwards;
+}
+
+.show {
+	display: block !important;
+	animation: fadeIn 0.5s ease-out forwards;
+}
+
 button.disabled {
 	pointer-events: none;
-	opacity: 0.5;
-	cursor: default;
+	cursor: default !important;
 }
 
 /* Réponse correcte (bleu clair pour la sélection) */
@@ -157,8 +210,9 @@ button.incorrect {
 	display: none; /* Caché pendant les questions */
 	background-color: rgba(255, 255, 255, 0.8);  /* Fond jaune clair pour le tableau */
 	border-radius: 10px;
-	padding: 10px;
+	padding: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	width: 110px;
 }
 
 #score-container table {
@@ -175,7 +229,8 @@ button.incorrect {
 
 #score-container th {
 	font-size: 20px;
-	font-weight: bold;
+	font-weight: 1000;  /* Gras pour le rendre plus visible */
+	font-family: "DM Sans";
 }
 
 #score-container td {
@@ -187,22 +242,22 @@ button.incorrect {
 	position: absolute;
 	right: 50px;
 	top: 50%;
+	transform: translateY(-50%);  /* Centrer verticalement */
 	background-color: #007bff;
 	color: white;
-	font-size: 18px;
+	font-size: 16px;
+	height: 48px;  /* Ajout d'un 'px' manquant */
 	border: none;
 	padding: 15px;
 	cursor: pointer;
 	border-radius: 10px;
-	display: none; /* Caché au départ */
+	display: block; /* Toujours visible */
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #validate-button:hover {
 	background-color: #0056b3;
-}
-
-#validate-button:active {
-	transform: scale(0.98);
 }
 
 /* Animations */
@@ -211,7 +266,21 @@ button.incorrect {
 	100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideIn {
-	0% { transform: translateX(-50%); opacity: 0; }
-	100% { transform: translateX(0); opacity: 1; }
+@keyframes fadeOut {
+	0% { opacity: 1; transform: translateY(0); }
+	100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* Transition pour l'apparition et la disparition des éléments */
+#categories-container.show {
+	opacity: 1;
+	visibility: visible;
+	display: block; /* Révéler */
+	transition: opacity 0.5s ease-in-out;
+}
+
+#question-container.show {
+	opacity: 1;
+	display: block; /* Révéler */
+	transition: opacity 0.5s ease-in-out;
 }
