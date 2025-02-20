@@ -76,7 +76,7 @@ ul {
 }
 
 #categories-container button:active {
-	background-color: #B0B0B0 !important;
+	background-color: #6b6b6b !important;
 	font-weight: 1000;
 }
 
@@ -113,6 +113,7 @@ ul {
 	gap: 15px;
 	width: 60%;
 	margin: 0 auto;
+	transition: all 0.3s ease;
 }
 
 #answers-container button {
@@ -147,6 +148,11 @@ ul {
 	background-color: #558ab8 !important;  /* Gris clair pour la sélection */
 	cursor: default !important;
 	font-weight: 700;
+}
+
+.selected-category {
+    background-color: rgba(0, 128, 255, 0.3); /* Exemple d'arrière-plan bleu pâle */
+    transition: background-color 0.3s ease-out;
 }
 
 .correct {
