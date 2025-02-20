@@ -35,7 +35,7 @@ ul {
 }
 
 #game-container {
-	width: 80%;  /* Ajuster pour avoir plus d'espace */
+	width: 60%;  /* Ajuster pour avoir plus d'espace */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -205,6 +205,14 @@ button.incorrect {
 	color: white;
 }
 
+#true-button {
+    background-color: #4CAF50; /* Vert pour "Vrai" */
+}
+
+#false-button {
+    background-color: #f44336; /* Rouge pour "Faux" */
+}
+
 #score-container {
 	position: absolute;
 	left: 20px;
@@ -240,11 +248,16 @@ button.incorrect {
 	font-size: 18px;
 }
 
+#yes-button:hover,
+#no-button:hover,
+#validate-button:hover {
+	background-color: #495057;
+}
+
 #validate-button {
 	position: absolute;
-	right: 50px;
+	right: 20px;
 	top: 50%;
-	transform: translateY(-50%);
 	background-color: #6C757D;
 	color: white;
 	font-size: 16px;
@@ -258,8 +271,19 @@ button.incorrect {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-#validate-button:hover {
-	background-color: #495057;
+#yes-button,
+#no-button {
+	background-color: #6C757D;
+	color: white;
+	font-size: 16px;
+	height: 48px;
+	border: none;
+	padding: 15px;
+	cursor: pointer;
+	border-radius: 10px;
+	display: block;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes fadeIn {
@@ -283,4 +307,20 @@ button.incorrect {
 	opacity: 1;
 	display: block;
 	transition: opacity 0.5s ease-in-out;
+}
+
+#validation-container {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#validation-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
