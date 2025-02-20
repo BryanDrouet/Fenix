@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+/* Styles généraux */
 body {
-	background-color: #2C073F; 
-	color: #E0E0E0; 
+	background-color: #2C073F;  /* Fond violet */
+	color: #E0E0E0;  /* Texte blanc cassé */
 	font-family: "DM Sans";
 	display: flex;
 	justify-content: center;
@@ -111,7 +112,7 @@ ul {
 }
 
 #answers-container button {
-	background-color: #757575;  /* Gris moyen pour les boutons */
+	background-color: #4B4B4B;  /* Gris moyen pour les boutons */
 	border: none;
 	color: white;
 	font-size: 16px;
