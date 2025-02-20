@@ -5,7 +5,7 @@ const categories = [
 	]},
 	{ name: "Théâtre", questions: [
 		{ type: "vrai_faux", question: "La pièce 'Le Cid' de Corneille a été jouée pour la première fois en 1637.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui a écrit 'Les Femmes Savantes'?", answers: ["Molière", "Racine", "Corneille", "Victor Hugo"], correct: "Molière" }
+		{ type: "2_4", question: "Qui a écrit 'Les Femmes Savantes' ?", answers: ["Molière", "Racine", "Corneille", "Victor Hugo"], correct: "Molière" }
 	]},
 	{ name: "Photo", questions: [
 		{ type: "vrai_faux", question: "Le daguerréotype a été inventé en 1839 par Louis Daguerre.", answers: ["Vrai", "Faux"], correct: "Vrai" },
@@ -13,7 +13,7 @@ const categories = [
 	]},
 	{ name: "Jardinage", questions: [
 		{ type: "vrai_faux", question: "Le bambou peut pousser jusqu'à un mètre par jour dans certaines conditions.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Quelle plante est la plus résistante à la sécheresse?", answers: ["Cactus", "Sarracénie", "Aloe Vera", "Fougère"], correct: "Cactus, Aloe Vera" }
+		{ type: "2_4", question: "Quelle plante est la plus résistante à la sécheresse ?", answers: ["Cactus", "Sarracénie", "Aloe Vera", "Fougère"], correct: "Cactus, Aloe Vera" }
 	]},
 	{ name: "Radio", questions: [
 		{ type: "vrai_faux", question: "La radio FM a été développée par Edwin Armstrong.", answers: ["Vrai", "Faux"], correct: "Vrai" },
@@ -21,7 +21,7 @@ const categories = [
 	]},
 	{ name: "Mystère", questions: [
 		{ type: "vrai_faux", question: "Tous les caméléons ont la capacité de changer de couleur.", answers: ["Vrai", "Faux"], correct: "Faux" },
-		{ type: "2_4", question: "Combien de types de caméléons existent-il?", answers: ["10", "150", "20", "200"], correct: "150" }
+		{ type: "2_4", question: "Combien de types de caméléons existent-il ?", answers: ["10", "150", "20", "200"], correct: "150" }
 	]},
 	{ name: "Jeux Vidéos", questions: [
 		{ type: "vrai_faux", question: "Le premier jeu vidéo à avoir intégré des éléments de simulation était 'Space Invaders'.", answers: ["Vrai", "Faux"], correct: "Faux" },
@@ -29,23 +29,23 @@ const categories = [
 	]},
 	{ name: "Politique", questions: [
 		{ type: "vrai_faux", question: "La Constitution de la Vème République a été adoptée en 1958.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui était le Premier ministre lors de la création du Rassemblement National?", answers: ["Mitterrand", "Chirac", "De Gaulle", "Valls"], correct: "De Gaulle" }
+		{ type: "2_4", question: "Qui était le Premier ministre lors de la création du Rassemblement National ?", answers: ["Mitterrand", "Chirac", "De Gaulle", "Valls"], correct: "De Gaulle" }
 	]},
 	{ name: "International", questions: [
 		{ type: "vrai_faux", question: "L'ONU est basée à Genève, en Suisse.", answers: ["Vrai", "Faux"], correct: "Faux" },
-		{ type: "2_4", question: "Quel pays est le plus grand producteur de café au monde?", answers: ["Brésil", "Vietnam", "Colombie", "Inde"], correct: "Brésil" }
+		{ type: "2_4", question: "Quel pays est le plus grand producteur de café au monde ?", answers: ["Brésil", "Vietnam", "Colombie", "Inde"], correct: "Brésil" }
 	]},
 	{ name: "Science", questions: [
 		{ type: "vrai_faux", question: "Le soleil est une étoile de type G.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Quel est l'élément chimique dont la formule est H2O?", answers: ["Oxygène", "Azote", "Hydrogène", "Eau"], correct: "Eau" }
+		{ type: "2_4", question: "Quel est l'élément chimique dont la formule est H2O ?", answers: ["Oxygène", "Azote", "Hydrogène", "Eau"], correct: "Eau" }
 	]},
 	{ name: "Musique", questions: [
 		{ type: "vrai_faux", question: "L'œuvre 'Symphonie fantastique' de Berlioz a été créée en 1830.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui a composé 'La Flûte enchantée'?", answers: ["Mozart", "Beethoven", "Verdi", "Berlioz"], correct: "Mozart" }
+		{ type: "2_4", question: "Qui a composé 'La Flûte enchantée' ?", answers: ["Mozart", "Beethoven", "Verdi", "Berlioz"], correct: "Mozart" }
 	]},
 	{ name: "Cinéma", questions: [
 		{ type: "vrai_faux", question: "Le film 'La Liste de Schindler' a remporté 7 Oscars.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui a réalisé 'The Dark Knight'?", answers: ["Christopher Nolan", "Ridley Scott", "Stanley Kubrick", "James Cameron"], correct: "Christopher Nolan" }
+		{ type: "2_4", question: "Qui a réalisé 'The Dark Knight' ?", answers: ["Christopher Nolan", "Ridley Scott", "Stanley Kubrick", "James Cameron"], correct: "Christopher Nolan" }
 	]}
 ];
 
