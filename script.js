@@ -49,13 +49,14 @@ const categories = [
 	]}
 ];
 
-const players = ["Matthew", "Clément", "Ethan"];
 let scores = { Matthew: 0, Clément: 0, Ethan: 0 };
 let currentPlayerIndex = 0;
 let usedCategories = new Set();
 let selectedAnswer = null;
 let questionCount = 0;
+let selectedCategory = null;
 
+const players = ["Matthew", "Clément", "Ethan"];
 const categoriesContainer = document.getElementById("categories-container");
 const questionContainer = document.getElementById("question-container");
 const questionText = document.getElementById("question");
@@ -71,6 +72,19 @@ if (questionCount >= 2) {
     if (questionCount === 0) {
         categoriesContainer.classList.add("hidden");
     }
+}
+
+function selectCategory(button) {
+    // Marquer la catégorie comme sélectionnée visuellement
+    if (selectedCategory) {
+        selectedCategory.classList.remove("selected-category");
+    }
+
+    selectedCategory = button;
+    button.classList.add("selected-category");
+
+    // Activer le bouton Valider
+    validateButton.disabled = false;
 }
 
 function centerCategories() {
@@ -150,14 +164,28 @@ function showScores() {
 
 // Initialise les boutons de catégories
 categories.forEach(category => {
-	const button = document.createElement("button");
-	button.textContent = category.name;
-	button.addEventListener("click", () => startQuestion(category, button));
-	categoriesContainer.appendChild(button);
+    const button = document.createElement("button");
+    button.textContent = category.name;
+    
+    // Ajouter l'événement de sélection de catégorie
+    button.addEventListener("click", () => {
+        selectCategory(button);  // Sélection visuelle temporaire
+        startQuestion(category, button);  // Lancer la question
+    });
+    
+    categoriesContainer.appendChild(button);
 });
 
 // Lancer une question
-function startQuestion(category, button) {
+function startQuestion() {
+    if (!selectedCategory) {
+        alert("Veuillez sélectionner une catégorie d'abord !");
+        return;
+    }
+
+    // Récupérer la catégorie sélectionnée
+    const category = categories.find(cat => cat.name === selectedCategory.textContent);
+    
     if (usedCategories.has(category.name)) return;
     usedCategories.add(category.name);
 
@@ -165,8 +193,8 @@ function startQuestion(category, button) {
     hideCategoriesAndShowQuestions();
 
     // Désactiver le bouton de catégorie
-    button.disabled = true;
-    button.classList.add("disabled");
+    selectedCategory.disabled = true;
+    selectedCategory.classList.add("disabled");
 
     const questionData = category.questions;
     let questionIndex = 0;
@@ -218,6 +246,7 @@ function askNextQuestion(questionData, questionIndex) {
         // Remplacer la validation par un bouton "Suivant"
         validateButton.textContent = "Suivant";
         validateButton.onclick = () => {
+			startQuestion();  
             askNextQuestion(questionData, questionIndex + 1);
             validateButton.textContent = "Valider";
         };
