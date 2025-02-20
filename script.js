@@ -1,51 +1,51 @@
 const categories = [
 	{ name: "Histoire", questions: [
-		{ type: "vrai_faux", question: "La Révolution Française a eu lieu en 1789.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "oui_non", question: "Napoléon Bonaparte est né en Corse.", answers: ["Oui", "Non"], correct: "Oui" }
+		{ type: "vrai_faux", question: "La Révolution Française a été provoquée par la prise de la Bastille.", answers: ["Vrai", "Faux"], correct: "Faux" },
+		{ type: "oui_non", question: "La guerre de Cent Ans a duré plus de 100 ans.", answers: ["Oui", "Non"], correct: "Non" }
 	]},
 	{ name: "Théâtre", questions: [
-		{ type: "vrai_faux", question: "Molière a écrit 'Le Cid'.", answers: ["Vrai", "Faux"], correct: "Faux" },
-		{ type: "2_4", question: "Qui est l'auteur de 'Le Misanthrope'?", answers: ["Molière", "Racine", "Corneille", "Victor Hugo"], correct: "Molière" }
+		{ type: "vrai_faux", question: "La pièce 'Le Cid' de Corneille a été jouée pour la première fois en 1637.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "2_4", question: "Qui a écrit 'Les Femmes Savantes'?", answers: ["Molière", "Racine", "Corneille", "Victor Hugo"], correct: "Molière" }
 	]},
 	{ name: "Photo", questions: [
-		{ type: "vrai_faux", question: "Le daguerréotype est une technique photographique.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "oui_non", question: "Les photographies en noir et blanc étaient plus populaires au début du 20e siècle.", answers: ["Oui", "Non"], correct: "Oui" }
+		{ type: "vrai_faux", question: "Le daguerréotype a été inventé en 1839 par Louis Daguerre.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "oui_non", question: "La photographie couleur a été popularisée avant la Première Guerre mondiale.", answers: ["Oui", "Non"], correct: "Non" }
 	]},
 	{ name: "Jardinage", questions: [
-		{ type: "vrai_faux", question: "Le cactus est une plante aquatique.", answers: ["Vrai", "Faux"], correct: "Faux" },
-		{ type: "2_4", question: "Quelles sont des plantes adaptées pour un jardin de rocaille?", answers: ["Cactus", "Lavande", "Rose", "Fougère"], correct: "Cactus, Lavande" }
+		{ type: "vrai_faux", question: "Le bambou peut pousser jusqu'à un mètre par jour dans certaines conditions.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "2_4", question: "Quelle plante est la plus résistante à la sécheresse?", answers: ["Cactus", "Sarracénie", "Aloe Vera", "Fougère"], correct: "Cactus, Aloe Vera" }
 	]},
 	{ name: "Radio", questions: [
-		{ type: "vrai_faux", question: "France Inter est une station privée.", answers: ["Vrai", "Faux"], correct: "Faux" },
-		{ type: "oui_non", question: "La radio FM est plus récente que la radio AM.", answers: ["Oui", "Non"], correct: "Non" }
+		{ type: "vrai_faux", question: "La radio FM a été développée par Edwin Armstrong.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "oui_non", question: "Les stations de radio AM émettent sur une bande de fréquence plus haute que celles en FM.", answers: ["Oui", "Non"], correct: "Non" }
 	]},
 	{ name: "Mystère", questions: [
-		{ type: "vrai_faux", question: "Le Caméléon change de couleur pour se camoufler.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Combien de pattes a un insecte?", answers: ["6", "8", "10", "12"], correct: "6" }
+		{ type: "vrai_faux", question: "Tous les caméléons ont la capacité de changer de couleur.", answers: ["Vrai", "Faux"], correct: "Faux" },
+		{ type: "2_4", question: "Combien de types de caméléons existent-il?", answers: ["10", "150", "20", "200"], correct: "150" }
 	]},
 	{ name: "Jeux Vidéos", questions: [
-		{ type: "vrai_faux", question: "Le premier jeu vidéo a été créé en 1958.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "oui_non", question: "Mario est un personnage de Sega.", answers: ["Oui", "Non"], correct: "Non" }
+		{ type: "vrai_faux", question: "Le premier jeu vidéo à avoir intégré des éléments de simulation était 'Space Invaders'.", answers: ["Vrai", "Faux"], correct: "Faux" },
+		{ type: "oui_non", question: "Le jeu 'Pong' a été l'un des premiers jeux à utiliser un processeur graphique dédié.", answers: ["Oui", "Non"], correct: "Non" }
 	]},
 	{ name: "Politique", questions: [
-		{ type: "vrai_faux", question: "Emmanuel Macron a été élu en 2017.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui a fondé le Parti Socialiste en France?", answers: ["Jaurès", "Mitterrand", "Hollande", "Valls"], correct: "Jaurès" }
+		{ type: "vrai_faux", question: "La Constitution de la Vème République a été adoptée en 1958.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "2_4", question: "Qui était le Premier ministre lors de la création du Rassemblement National?", answers: ["Mitterrand", "Chirac", "De Gaulle", "Valls"], correct: "De Gaulle" }
 	]},
 	{ name: "International", questions: [
-		{ type: "vrai_faux", question: "Le Vatican est un pays.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Quels pays sont dans l'Union Européenne?", answers: ["France", "Suisse", "Espagne", "Norvège"], correct: "France, Espagne" }
+		{ type: "vrai_faux", question: "L'ONU est basée à Genève, en Suisse.", answers: ["Vrai", "Faux"], correct: "Faux" },
+		{ type: "2_4", question: "Quel pays est le plus grand producteur de café au monde?", answers: ["Brésil", "Vietnam", "Colombie", "Inde"], correct: "Brésil" }
 	]},
 	{ name: "Science", questions: [
-		{ type: "vrai_faux", question: "La Terre est plate.", answers: ["Vrai", "Faux"], correct: "Faux" },
-		{ type: "2_4", question: "Quelle est la planète la plus proche du Soleil?", answers: ["Terre", "Vénus", "Mars", "Mercure"], correct: "Mercure" }
+		{ type: "vrai_faux", question: "Le soleil est une étoile de type G.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "2_4", question: "Quel est l'élément chimique dont la formule est H2O?", answers: ["Oxygène", "Azote", "Hydrogène", "Eau"], correct: "Eau" }
 	]},
 	{ name: "Musique", questions: [
-		{ type: "vrai_faux", question: "Beethoven était sourd.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui a composé 'La symphonie du Nouveau Monde'?", answers: ["Mozart", "Beethoven", "Dvořák", "Chopin"], correct: "Dvořák" }
+		{ type: "vrai_faux", question: "L'œuvre 'Symphonie fantastique' de Berlioz a été créée en 1830.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "2_4", question: "Qui a composé 'La Flûte enchantée'?", answers: ["Mozart", "Beethoven", "Verdi", "Berlioz"], correct: "Mozart" }
 	]},
 	{ name: "Cinéma", questions: [
-		{ type: "vrai_faux", question: "La première guerre mondiale est un sujet du film '1917'.", answers: ["Vrai", "Faux"], correct: "Vrai" },
-		{ type: "2_4", question: "Qui a réalisé le film 'Inception'?", answers: ["Christopher Nolan", "Steven Spielberg", "Quentin Tarantino", "Martin Scorsese"], correct: "Christopher Nolan" }
+		{ type: "vrai_faux", question: "Le film 'La Liste de Schindler' a remporté 7 Oscars.", answers: ["Vrai", "Faux"], correct: "Vrai" },
+		{ type: "2_4", question: "Qui a réalisé 'The Dark Knight'?", answers: ["Christopher Nolan", "Ridley Scott", "Stanley Kubrick", "James Cameron"], correct: "Christopher Nolan" }
 	]}
 ];
 
